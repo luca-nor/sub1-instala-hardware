@@ -3,473 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte Móvil — Ensamble de Equipos — CECyT 08</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
+    <title>Reporte Móvil - Ensamble de Equipos - CECyT 08</title>
     <style>
-        /* ─── TOKENS ─────────────────────────────────────────────── */
         :root {
-            --guinda:       #621132;
-            --guinda-mid:   #8b1840;
-            --guinda-light: #f5e9ed;
-            --guinda-pale:  #fdf4f6;
-            --ink:          #1a1a2e;
-            --ink-mid:      #3d3d5c;
-            --ink-light:    #6b6b8a;
-            --rule:         #ddd8e3;
-            --green-exc:    #0a7055;
-            --green-bg:     #edf7f4;
-            --blue-sat:     #1a5fa8;
-            --blue-bg:      #edf4fb;
-            --red-req:      #b91c1c;
-            --red-bg:       #fef2f2;
-            --mono:         'IBM Plex Mono', monospace;
-            --sans:         'IBM Plex Sans', sans-serif;
-            --radius:       6px;
+            --primary-color: #621132; /* Guinda institucional */
+            --secondary-color: #9D2449;
+            --light-bg: #fdfdfd;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --accent-green: #2e7d32;
         }
 
-        /* ─── RESET & BASE ───────────────────────────────────────── */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
         body {
-            font-family: var(--sans);
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--ink);
-            background: #f0eef4;
+            margin: 0;
+            padding: 0;
+            background-color: #f7fafc;
+            color: var(--text-color);
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* ─── SHELL ──────────────────────────────────────────────── */
-        .shell {
+        .app-container {
             width: 100%;
-            max-width: 680px;
+            max-width: 600px;
             margin: 0 auto;
             background: #fff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 8px 32px rgba(98,17,50,.12);
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
         }
 
-        /* ─── HEADER ─────────────────────────────────────────────── */
+        /* Encabezado Móvil */
         header {
-            background: var(--guinda);
-            color: #fff;
-            padding: 20px 22px 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* circuito decorativo SVG de fondo */
-        header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: .07;
-            background-image:
-                repeating-linear-gradient(0deg,   transparent, transparent 24px, rgba(255,255,255,.8) 24px, rgba(255,255,255,.8) 25px),
-                repeating-linear-gradient(90deg,  transparent, transparent 24px, rgba(255,255,255,.8) 24px, rgba(255,255,255,.8) 25px);
-            background-size: 25px 25px;
-        }
-
-        .hd-row {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 12px;
-            position: relative;
-        }
-
-        .hd-badge {
-            font-family: var(--mono);
-            font-size: .68rem;
-            font-weight: 600;
-            letter-spacing: .08em;
-            background: rgba(255,255,255,.15);
-            border: 1px solid rgba(255,255,255,.3);
-            border-radius: 4px;
-            padding: 4px 9px;
-            white-space: nowrap;
-            color: #fff;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
         }
 
         header h1 {
-            font-size: 1.18rem;
-            font-weight: 700;
-            letter-spacing: -.01em;
-            line-height: 1.2;
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
         }
 
         header p {
-            font-size: .82rem;
-            opacity: .82;
-            margin-top: 4px;
+            margin: 5px 0 0 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
         }
 
-        .hd-meta {
-            display: flex;
-            gap: 6px;
-            margin-top: 12px;
-            position: relative;
+        .nem-tag {
+            background-color: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 5px;
+            font-weight: bold;
         }
 
-        .hd-chip {
-            font-family: var(--mono);
-            font-size: .68rem;
-            background: rgba(255,255,255,.12);
-            border: 1px solid rgba(255,255,255,.22);
-            border-radius: 20px;
-            padding: 3px 10px;
-            color: rgba(255,255,255,.92);
-        }
-
-        /* ─── TABS ───────────────────────────────────────────────── */
-        input[type="radio"].tab-r { display: none; }
-
+        /* Sistema de Pestañas Móviles (Puro CSS) */
         .tabs {
             display: flex;
-            background: #fff;
-            border-bottom: 2px solid var(--rule);
+            background: #edf2f7;
             overflow-x: auto;
-            scrollbar-width: none;
+            border-bottom: 2px solid var(--border-color);
+            scrollbar-width: none; /* Ocultar barra en Firefox */
         }
-        .tabs::-webkit-scrollbar { display: none; }
+        .tabs::-webkit-scrollbar { display: none; } /* Ocultar barra en Chrome/Safari */
 
-        .tab-lbl {
+        .tab-link {
             flex: 1;
-            min-width: 90px;
-            padding: 11px 6px 9px;
+            min-width: 100px;
             text-align: center;
-            font-size: .8rem;
-            font-weight: 600;
-            color: var(--ink-light);
+            padding: 12px 5px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #718096;
             cursor: pointer;
             border-bottom: 3px solid transparent;
             white-space: nowrap;
-            transition: color .18s, border-color .18s;
-            user-select: none;
         }
 
-        #t1:checked ~ .tabs .l1,
-        #t2:checked ~ .tabs .l2,
-        #t3:checked ~ .tabs .l3,
-        #t4:checked ~ .tabs .l4 {
-            color: var(--guinda);
-            border-bottom-color: var(--guinda);
-            background: var(--guinda-pale);
-        }
-
-        /* ─── PANELS ─────────────────────────────────────────────── */
-        .panel {
-            display: none;
-            padding: 20px 22px;
-            flex: 1;
-            animation: fadeIn .2s ease;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-
-        #t1:checked ~ #p1,
-        #t2:checked ~ #p2,
-        #t3:checked ~ #p3,
-        #t4:checked ~ #p4 { display: block; }
-
-        .panel-title {
-            font-family: var(--mono);
-            font-size: .72rem;
-            font-weight: 600;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            color: var(--guinda);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 18px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--guinda-light);
-        }
-
-        .panel-title::before {
-            content: '';
-            display: inline-block;
-            width: 3px;
-            height: 14px;
-            background: var(--guinda);
-            border-radius: 2px;
-        }
-
-        /* ─── FORM ───────────────────────────────────────────────── */
-        .fg { margin-bottom: 14px; }
-
-        label.lbl {
-            display: block;
-            font-size: .78rem;
-            font-weight: 600;
-            color: var(--ink-mid);
-            margin-bottom: 5px;
-            letter-spacing: .02em;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px 12px;
-            font-family: var(--sans);
-            font-size: .9rem;
-            border: 1.5px solid var(--rule);
-            border-radius: var(--radius);
-            background: #fafafa;
-            color: var(--ink);
-            outline: none;
-            transition: border-color .18s, box-shadow .18s;
-        }
-
-        input[type="text"]:focus,
-        input[type="date"]:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--guinda-mid);
-            box-shadow: 0 0 0 3px rgba(98,17,50,.08);
+        /* Lógica para mostrar/ocultar secciones usando Radio Buttons */
+        input[type="radio"].tab-state { display: none; }
+        
+        #tab1:checked ~ .tabs .link1,
+        #tab2:checked ~ .tabs .link2,
+        #tab3:checked ~ .tabs .link3,
+        #tab4:checked ~ .tabs .link4 {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
             background: #fff;
         }
 
-        textarea { min-height: 96px; resize: vertical; }
+        .tab-content {
+            display: none;
+            padding: 15px;
+            flex: 1;
+        }
 
-        .input-stack { display: flex; flex-direction: column; gap: 8px; }
+        #tab1:checked ~ #content1,
+        #tab2:checked ~ #content2,
+        #tab3:checked ~ #content3,
+        #tab4:checked ~ #content4 {
+            display: block;
+        }
 
-        /* ─── SEGURIDAD ──────────────────────────────────────────── */
+        /* Estilos de Formulario Touch-Friendly */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #4a5568;
+        }
+
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #fff;
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--secondary-color);
+        }
+
+        textarea { min-height: 100px; resize: none; }
+
+        /* Checklist de seguridad táctil */
         .check-card {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 11px 14px;
-            border: 1.5px solid var(--rule);
-            border-radius: var(--radius);
-            margin-bottom: 8px;
-            background: #fafafa;
-            transition: border-color .18s, background .18s;
-            cursor: pointer;
-        }
-
-        .check-card:has(input:checked) {
-            border-color: var(--guinda);
-            background: var(--guinda-pale);
+            background: #fff8f8;
+            border: 1px solid #fed7d7;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
 
         .check-card input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--guinda);
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            accent-color: var(--secondary-color);
             flex-shrink: 0;
-            cursor: pointer;
         }
 
-        .check-card span {
-            font-size: .88rem;
-            color: var(--ink-mid);
-            line-height: 1.4;
-        }
+        .check-card span { font-size: 0.95rem; }
 
-        .check-icon {
-            font-size: 1rem;
-            margin-right: 2px;
-            opacity: .7;
-        }
-
-        /* ─── FOTOS ──────────────────────────────────────────────── */
+        /* Contenedor de Evidencias */
         .photo-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
-        .photo-slot {
-            position: relative;
-            border: 2px dashed var(--guinda-mid);
-            border-radius: var(--radius);
-            height: 148px;
-            overflow: hidden;
-            background: var(--guinda-pale);
+        .photo-uploader {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            height: 130px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            transition: border-color .18s;
-        }
-
-        .photo-slot:hover { border-color: var(--guinda); }
-
-        .photo-slot input[type="file"] {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            cursor: pointer;
-            z-index: 3;
-        }
-
-        .photo-slot .slot-label {
-            font-family: var(--mono);
-            font-size: .68rem;
-            font-weight: 600;
-            color: var(--guinda-mid);
-            text-align: center;
-            pointer-events: none;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 4px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #a0aec0;
+            position: relative;
+            background: #fafafa;
         }
 
-        .photo-slot .slot-icon {
-            font-size: 1.6rem;
-            opacity: .5;
-        }
-
-        .photo-slot .slot-num {
-            font-size: .62rem;
-            background: rgba(98,17,50,.1);
-            padding: 2px 7px;
-            border-radius: 10px;
-            letter-spacing: .06em;
-        }
-
-        .photo-slot .img-preview {
+        .photo-uploader input[type="file"] {
             position: absolute;
-            inset: 0;
-            object-fit: cover;
             width: 100%;
             height: 100%;
-            z-index: 1;
-            display: none;
+            opacity: 0;
+            cursor: pointer;
         }
 
-        .photo-slot.has-img .slot-label { display: none; }
-        .photo-slot.has-img .img-preview { display: block; }
-        .photo-slot.has-img .change-btn {
-            display: flex !important;
-        }
-
-        .change-btn {
-            display: none;
-            position: absolute;
-            bottom: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--mono);
-            font-size: .62rem;
-            font-weight: 600;
-            background: rgba(255,255,255,.88);
-            border: 1px solid rgba(0,0,0,.15);
-            border-radius: 20px;
-            padding: 3px 10px;
-            color: var(--ink);
-            z-index: 4;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        /* ─── RÚBRICA ────────────────────────────────────────────── */
+        /* Rúbrica en formato Tarjeta Móvil */
         .rubric-card {
-            border: 1.5px solid var(--rule);
-            border-radius: var(--radius);
-            overflow: hidden;
-            margin-bottom: 14px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        .rubric-head {
+        .rubric-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        .rubric-level {
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            padding: 6px;
+            border-radius: 4px;
+        }
+        .level-exc { background: #e6fffa; color: #234e52; border-left: 3px solid #319795; }
+        .level-sat { background: #ebf8ff; color: #2b6cb0; border-left: 3px solid #4299e1; }
+        .level-req { background: #fff5f5; color: #9b2c2c; border-left: 3px solid #e53e3e; }
+
+        .rubric-score {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
-            background: var(--guinda);
-            color: #fff;
+            margin-top: 10px;
+            background: #f7fafc;
+            padding: 8px;
+            border-radius: 6px;
         }
 
-        .rubric-head span:first-child {
-            font-weight: 700;
-            font-size: .88rem;
-        }
-
-        .rubric-score-inline {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: .78rem;
-        }
-
-        .rubric-score-inline input {
-            width: 44px;
-            padding: 4px 6px;
+        .rubric-score input {
+            width: 60px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,.4);
-            border-radius: 4px;
-            background: rgba(255,255,255,.15);
-            color: #fff;
-            font-family: var(--mono);
-            font-weight: 600;
-            font-size: .82rem;
-            outline: none;
+            padding: 6px;
         }
 
-        .rubric-score-inline input::placeholder { color: rgba(255,255,255,.5); }
-
-        .rubric-levels { padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; }
-
-        .rl {
-            font-size: .8rem;
-            padding: 7px 10px;
-            border-radius: 4px;
-            border-left: 3px solid transparent;
-            line-height: 1.4;
-        }
-
-        .rl-exc { background: var(--green-bg); color: #0a4a3a; border-color: var(--green-exc); }
-        .rl-sat { background: var(--blue-bg);  color: #0f3d74; border-color: var(--blue-sat); }
-        .rl-req { background: var(--red-bg);   color: #7a1010; border-color: var(--red-req); }
-
-        .rubric-total {
-            border: 2px solid var(--guinda);
-            border-radius: var(--radius);
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            background: var(--guinda-pale);
-            margin-top: 4px;
-        }
-
-        .rubric-total label {
-            font-weight: 700;
-            color: var(--guinda);
-            font-size: .95rem;
-        }
-
-        .rubric-total input {
-            width: 120px;
-            padding: 8px 10px;
-            text-align: center;
-            border: 2px solid var(--guinda);
-            border-radius: var(--radius);
-            font-family: var(--mono);
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--guinda);
+        .footer-buttons {
+            padding: 15px;
             background: #fff;
-            outline: none;
-        }
-
-        /* ─── FOOTER ─────────────────────────────────────────────── */
-        .footer-bar {
-            padding: 14px 22px;
-            background: #fff;
-            border-top: 1.5px solid var(--rule);
+            border-top: 1px solid var(--border-color);
             display: flex;
             gap: 10px;
         }
@@ -478,541 +255,190 @@
             flex: 1;
             padding: 12px;
             border: none;
-            border-radius: var(--radius);
-            font-family: var(--sans);
-            font-size: .9rem;
-            font-weight: 700;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
             cursor: pointer;
-            letter-spacing: .01em;
-            transition: opacity .18s, transform .12s;
         }
-
-        .btn:active { transform: scale(.97); }
-
-        .btn-print {
-            background: var(--guinda);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-print svg { width: 17px; height: 17px; fill: #fff; }
-
-        /* ─── PROGRESS DOTS (visual only) ────────────────────────── */
-        .progress-bar {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-            padding: 8px 22px;
-            background: var(--guinda-pale);
-            border-bottom: 1px solid var(--guinda-light);
-        }
-
-        .prog-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--guinda-light);
-            border: 1.5px solid var(--guinda-mid);
-            transition: background .2s;
-        }
-
-        .prog-line {
-            flex: 1;
-            height: 1.5px;
-            background: var(--guinda-light);
-        }
-
-        /* ════════════════════════════════════════════════════════════
-           PRINT STYLES — carta / A4, professional
-           ════════════════════════════════════════════════════════════ */
-        @media print {
-            @page {
-                size: letter;
-                margin: 16mm 18mm 20mm;
-            }
-
-            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-
-            body {
-                background: #fff !important;
-                font-size: 10.5pt;
-            }
-
-            /* ── layout ── */
-            .shell {
-                max-width: 100%;
-                box-shadow: none !important;
-            }
-
-            .tabs,
-            .footer-bar,
-            .progress-bar,
-            input[type="radio"].tab-r,
-            .photo-slot input[type="file"],
-            .change-btn,
-            .slot-label { display: none !important; }
-
-            /* ── show all panels ── */
-            .panel {
-                display: block !important;
-                padding: 0 !important;
-                page-break-inside: avoid;
-            }
-
-            /* ── header for print ── */
-            header {
-                padding: 12pt 0 10pt !important;
-                background: var(--guinda) !important;
-                color: #fff !important;
-                -webkit-print-color-adjust: exact;
-            }
-
-            header::before { display: none; }
-
-            header h1 { font-size: 13pt !important; }
-            header p  { font-size: 9pt !important; }
-
-            /* ── section dividers ── */
-            .panel {
-                border-top: 1.5pt solid var(--guinda) !important;
-                padding-top: 12pt !important;
-                margin-top: 10pt !important;
-            }
-
-            .panel-title {
-                font-size: 7.5pt !important;
-                color: var(--guinda) !important;
-                margin-bottom: 10pt !important;
-            }
-
-            /* ── fields ── */
-            input[type="text"],
-            input[type="date"],
-            select,
-            textarea {
-                border: none !important;
-                border-bottom: 0.75pt solid #888 !important;
-                border-radius: 0 !important;
-                background: transparent !important;
-                padding: 2pt 0 !important;
-                font-size: 10pt !important;
-                box-shadow: none !important;
-            }
-
-            /* ── checklist ── */
-            .check-card {
-                border: 0.75pt solid #bbb !important;
-                background: transparent !important;
-                padding: 5pt 8pt !important;
-                margin-bottom: 5pt !important;
-                break-inside: avoid;
-            }
-
-            .check-card:has(input:checked) {
-                background: var(--guinda-pale) !important;
-                border-color: var(--guinda) !important;
-            }
-
-            .check-card input[type="checkbox"] {
-                width: 14px !important;
-                height: 14px !important;
-            }
-
-            /* ── photos ── */
-            .photo-grid {
-                grid-template-columns: 1fr 1fr 1fr 1fr !important;
-                gap: 6pt !important;
-            }
-
-            .photo-slot {
-                height: 80pt !important;
-                border: 0.75pt solid #aaa !important;
-                background: #f9f9f9 !important;
-            }
-
-            .photo-slot.has-img .img-preview { display: block !important; }
-
-            /* ── rúbrica ── */
-            .rubric-card {
-                border: 0.75pt solid var(--guinda) !important;
-                break-inside: avoid;
-                margin-bottom: 8pt !important;
-            }
-
-            .rubric-head {
-                background: var(--guinda) !important;
-                padding: 5pt 10pt !important;
-            }
-
-            .rubric-score-inline input {
-                border: 0.75pt solid rgba(255,255,255,.6) !important;
-                background: rgba(255,255,255,.2) !important;
-                color: #fff !important;
-            }
-
-            .rubric-levels { padding: 6pt 10pt !important; gap: 4pt !important; }
-
-            .rl { font-size: 8pt !important; padding: 4pt 7pt !important; }
-            .rl-exc { background: var(--green-bg) !important; }
-            .rl-sat { background: var(--blue-bg)  !important; }
-            .rl-req { background: var(--red-bg)   !important; }
-
-            .rubric-total {
-                background: var(--guinda-pale) !important;
-                border: 1.5pt solid var(--guinda) !important;
-                padding: 8pt 12pt !important;
-            }
-
-            /* ── firma docente ── */
-            .firma-row {
-                display: flex !important;
-            }
-
-            /* ── footer de página ── */
-            .print-footer {
-                display: block !important;
-            }
-        }
-
-        /* ─── FIRMA (oculta en pantalla, visible al imprimir) ─────── */
-        .firma-row {
-            display: none;
-            gap: 24pt;
-            margin-top: 18pt;
-            padding-top: 10pt;
-            border-top: 1pt solid #ccc;
-        }
-
-        .firma-box {
-            flex: 1;
-            text-align: center;
-        }
-
-        .firma-line {
-            border-bottom: 1pt solid #555;
-            margin-bottom: 4pt;
-            height: 28pt;
-        }
-
-        .firma-label {
-            font-size: 8pt;
-            color: #555;
-            font-family: var(--mono);
-            letter-spacing: .05em;
-        }
-
-        /* ─── PRINT FOOTER (oculto en pantalla) ─────────────────── */
-        .print-footer {
-            display: none;
-            text-align: center;
-            font-family: var(--mono);
-            font-size: 7.5pt;
-            color: #888;
-            margin-top: 16pt;
-            padding-top: 6pt;
-            border-top: 0.5pt solid #ddd;
-            letter-spacing: .06em;
-        }
-
+        .btn-primary { background: var(--primary-color); color: white; }
     </style>
 </head>
 <body>
 
-<!-- Radios de control de pestañas -->
-<input type="radio" name="tabs" id="t1" class="tab-r" checked>
-<input type="radio" name="tabs" id="t2" class="tab-r">
-<input type="radio" name="tabs" id="t3" class="tab-r">
-<input type="radio" name="tabs" id="t4" class="tab-r">
+<div class="app-container">
+    <input type="radio" name="app-tabs" id="tab1" class="tab-state" checked>
+    <input type="radio" name="app-tabs" id="tab2" class="tab-state">
+    <input type="radio" name="app-tabs" id="tab3" class="tab-state">
+    <input type="radio" name="app-tabs" id="tab4" class="tab-state">
 
-<div class="shell">
-
-    <!-- ── HEADER ── -->
     <header>
-        <div class="hd-row">
-            <div>
-                <h1>CECyT 08 — La Trinitaria</h1>
-                <p>Soporte y Gestión de Tecnologías de la Información · Módulo I</p>
-            </div>
-            <span class="hd-badge">NEM</span>
-        </div>
-        <div class="hd-meta">
-            <span class="hd-chip">Ensamble de Equipos</span>
-            <span class="hd-chip">Práctica de Taller</span>
-        </div>
+        <h1>CECyT 08 - La Trinitaria</h1>
+        <p>Soporte y Gestión de TI • Módulo I</p>
+        <span class="nem-tag">Comunidad NEM</span>
     </header>
 
-    <!-- ── TABS ── -->
     <div class="tabs">
-        <label for="t1" class="tab-lbl l1">① Datos</label>
-        <label for="t2" class="tab-lbl l2">② Seguridad</label>
-        <label for="t3" class="tab-lbl l3">③ Reporte</label>
-        <label for="t4" class="tab-lbl l4">④ Rúbrica</label>
+        <label for="tab1" class="tab-link link1">1. Datos</label>
+        <label for="tab2" class="tab-link link2">2. Seguridad</label>
+        <label for="tab3" class="tab-link link3">3. Reporte</label>
+        <label for="tab4" class="tab-link link4">4. Rúbrica</label>
     </div>
 
-    <!-- ═══════════════════════════════════════════════
-         PANEL 1 — DATOS GENERALES
-    ═══════════════════════════════════════════════ -->
-    <div class="panel" id="p1">
-        <div class="panel-title">Datos Generales de la Práctica</div>
-
-        <div class="fg">
-            <label class="lbl">Grupo</label>
+    <div class="tab-content" id="content1">
+        <h3>Datos Generales de la Práctica</h3>
+        <div class="form-group">
+            <label>Grupo:</label>
             <select>
-                <option value="">Seleccionar grupo…</option>
-                <option>2do Semestre — Grupo A</option>
-                <option>2do Semestre — Grupo B</option>
-                <option>2do Semestre — Grupo C</option>
+                <option>2do Semestre - Grupo A</option>
+                <option>2do Semestre - Grupo B</option>
+                <option>2do Semestre - Grupo C</option>
             </select>
         </div>
-
-        <div class="fg">
-            <label class="lbl">Fecha de la Práctica</label>
+        <div class="form-group">
+            <label>Fecha:</label>
             <input type="date">
         </div>
-
-        <div class="fg">
-            <label class="lbl">Nombre del Equipo / Comunidad</label>
+        <div class="form-group">
+            <label>Nombre del Equipo / Comunidad:</label>
             <input type="text" placeholder="Ej. Los Bits del Tecolote">
         </div>
-
-        <div class="fg">
-            <label class="lbl">Integrantes del Equipo</label>
-            <div class="input-stack">
-                <input type="text" placeholder="Integrante 1 — Coordinador(a)">
-                <input type="text" placeholder="Integrante 2">
-                <input type="text" placeholder="Integrante 3">
-                <input type="text" placeholder="Integrante 4">
-            </div>
+        <div class="form-group">
+            <label>Integrantes del Equipo:</label>
+            <input type="text" placeholder="Integrante 1 (Coordinador)" style="margin-bottom: 8px;">
+            <input type="text" placeholder="Integrante 2" style="margin-bottom: 8px;">
+            <input type="text" placeholder="Integrante 3" style="margin-bottom: 8px;">
+            <input type="text" placeholder="Integrante 4">
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════
-         PANEL 2 — SEGURIDAD
-    ═══════════════════════════════════════════════ -->
-    <div class="panel" id="p2">
-        <div class="panel-title">Medidas de Seguridad e Higiene</div>
-
-        <label class="check-card" for="c1">
-            <input type="checkbox" id="c1">
-            <span><span class="check-icon">⚡</span> Uso correcto de la pulsera antiestática durante toda la práctica.</span>
-        </label>
-        <label class="check-card" for="c2">
-            <input type="checkbox" id="c2">
-            <span><span class="check-icon">👕</span> Ropa adecuada: sin mangas largas ni holgadas que interfieran con el equipo.</span>
-        </label>
-        <label class="check-card" for="c3">
-            <input type="checkbox" id="c3">
-            <span><span class="check-icon">💍</span> Sin joyería metálica: anillos, relojes o pulseras retirados antes de iniciar.</span>
-        </label>
-        <label class="check-card" for="c4">
-            <input type="checkbox" id="c4">
-            <span><span class="check-icon">💈</span> Cabello completamente recogido y zona de trabajo despejada.</span>
-        </label>
-        <label class="check-card" for="c5">
-            <input type="checkbox" id="c5">
-            <span><span class="check-icon">🔩</span> Uso de organizador / imán para tornillería; ninguna pieza suelta en la mesa.</span>
-        </label>
+    <div class="tab-content" id="content2">
+        <h3>Medidas de Seguridad e Higiene</h3>
+        <p style="font-size: 0.85rem; color:#718096; margin-bottom: 15px;">Marquen los elementos validados en la mesa de trabajo antes de iniciar:</p>
+        
+        <div class="check-card">
+            <input type="checkbox">
+            <span>Uso correcto de la pulsera antiestática.</span>
+        </div>
+        <div class="check-card">
+            <input type="checkbox">
+            <span>Ropa adecuada (sin mangas largas).</span>
+        </div>
+        <div class="check-card">
+            <input type="checkbox">
+            <span>Sin joyería (anillos, relojes, pulseras).</span>
+        </div>
+        <div class="check-card">
+            <input type="checkbox">
+            <span>Cabello completamente recogido.</span>
+        </div>
+        <div class="check-card">
+            <input type="checkbox">
+            <span>Uso de organizador/imán para tornillos.</span>
+        </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════
-         PANEL 3 — REPORTE DE PRÁCTICA
-    ═══════════════════════════════════════════════ -->
-    <div class="panel" id="p3">
-        <div class="panel-title">Desarrollo de la Práctica</div>
-
-        <div class="fg">
-            <label class="lbl">Materiales y Herramientas Utilizadas</label>
-            <textarea placeholder="Destornilladores (cruz / plano), pasta térmica, aire comprimido, pulsera antiestática, organizador de tornillos…"></textarea>
+    <div class="tab-content" id="content3">
+        <h3>Desarrollo de la Práctica</h3>
+        
+        <div class="form-group">
+            <label>Materiales y Herramientas:</label>
+            <textarea placeholder="Destornilladores, pasta térmica, modelo de PC..."></textarea>
         </div>
 
-        <div class="fg">
-            <label class="lbl">Bitácora del Proceso — Desensamble y Ensamble</label>
-            <textarea style="min-height:130px" placeholder="Describan detalladamente el orden en que desmontaron y volvieron a montar los componentes del equipo…"></textarea>
+        <div class="form-group">
+            <label>Bitácora del Proceso (Desensamble y Ensamble):</label>
+            <textarea placeholder="Describan de forma libre y detallada los pasos realizados..."></textarea>
         </div>
 
-        <div class="fg">
-            <label class="lbl">Evidencias Fotográficas</label>
+        <div class="form-group">
+            <label>Evidencias Fotográficas (Toca para subir):</label>
             <div class="photo-grid">
-                <div class="photo-slot" data-n="1">
-                    <input type="file" accept="image/*" capture="environment">
-                    <img class="img-preview" alt="Evidencia 1">
-                    <div class="slot-label">
-                        <span class="slot-icon">📷</span>
-                        <span class="slot-num">EV-01</span>
-                    </div>
-                    <span class="change-btn">✎ Cambiar</span>
+                <div class="photo-uploader">
+                    <span>📷 Desensamble</span>
+                    <input type="file" accept="image/*">
                 </div>
-                <div class="photo-slot" data-n="2">
-                    <input type="file" accept="image/*" capture="environment">
-                    <img class="img-preview" alt="Evidencia 2">
-                    <div class="slot-label">
-                        <span class="slot-icon">📷</span>
-                        <span class="slot-num">EV-02</span>
-                    </div>
-                    <span class="change-btn">✎ Cambiar</span>
+                <div class="photo-uploader">
+                    <span>📷 Seguridad</span>
+                    <input type="file" accept="image/*">
                 </div>
-                <div class="photo-slot" data-n="3">
-                    <input type="file" accept="image/*" capture="environment">
-                    <img class="img-preview" alt="Evidencia 3">
-                    <div class="slot-label">
-                        <span class="slot-icon">📷</span>
-                        <span class="slot-num">EV-03</span>
-                    </div>
-                    <span class="change-btn">✎ Cambiar</span>
+                <div class="photo-uploader">
+                    <span>📷 Componentes</span>
+                    <input type="file" accept="image/*">
                 </div>
-                <div class="photo-slot" data-n="4">
-                    <input type="file" accept="image/*" capture="environment">
-                    <img class="img-preview" alt="Evidencia 4">
-                    <div class="slot-label">
-                        <span class="slot-icon">📷</span>
-                        <span class="slot-num">EV-04</span>
-                    </div>
-                    <span class="change-btn">✎ Cambiar</span>
+                <div class="photo-uploader">
+                    <span>📷 Finalizado</span>
+                    <input type="file" accept="image/*">
                 </div>
             </div>
         </div>
 
-        <div class="fg">
-            <label class="lbl">Conclusiones del Equipo / Comunidad</label>
-            <textarea placeholder="Reflexionen sobre las dificultades encontradas, aprendizajes en el manejo de hardware y aportaciones individuales al equipo…"></textarea>
+        <div class="form-group">
+            <label>Conclusiones Individuales:</label>
+            <textarea placeholder="Integrante 1: Aprendizaje obtenido..." style="margin-bottom:8px;"></textarea>
+            <textarea placeholder="Integrante 2: Aprendizaje obtenido..." style="margin-bottom:8px;"></textarea>
+            <textarea placeholder="Integrante 3: Aprendizaje obtenido..." style="margin-bottom:8px;"></textarea>
+            <textarea placeholder="Integrante 4: Aprendizaje obtenido..."></textarea>
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════
-         PANEL 4 — RÚBRICA
-    ═══════════════════════════════════════════════ -->
-    <div class="panel" id="p4">
-        <div class="panel-title">Rúbrica de Evaluación Socioformativa</div>
-
-        <!-- Criterio 1 -->
+    <div class="tab-content" id="content4">
+        <h3>Rúbrica de Evaluación Socioformativa</h3>
+        
         <div class="rubric-card">
-            <div class="rubric-head">
-                <span>1. Herramientas y Área de Trabajo</span>
-                <div class="rubric-score-inline">
-                    <span>Pts:</span>
-                    <input type="text" id="s1" placeholder="—" maxlength="2" oninput="calcTotal()">
-                    <span>/ 4</span>
-                </div>
-            </div>
-            <div class="rubric-levels">
-                <div class="rl rl-exc"><strong>Exc — 4 pts:</strong> Orden total; usa imán y pulsera antiestática sin fallas en todo momento.</div>
-                <div class="rl rl-sat"><strong>Sat — 3 pts:</strong> Trabajo seguro pero con olvidos menores de orden.</div>
-                <div class="rl rl-req"><strong>Req — 2 pts:</strong> Pone en riesgo el hardware o manipula componentes sin el cuidado requerido.</div>
+            <div class="rubric-title">1. Herramientas y Área de Trabajo</div>
+            <div class="rubric-level level-exc"><strong>Exc (4 pts):</strong> Orden total, usa imanes y pulsera antiestática sin fallas.</div>
+            <div class="rubric-level level-sat"><strong>Sat (3 pts):</strong> Trabajo seguro pero con olvidos menores de orden.</div>
+            <div class="rubric-level level-req"><strong>Req (2 pts):</strong> Pone en riesgo el hardware o manipula sin cuidado.</div>
+            <div class="rubric-score">
+                <span>Puntaje:</span>
+                <input type="text" placeholder="0">
             </div>
         </div>
 
-        <!-- Criterio 2 -->
         <div class="rubric-card">
-            <div class="rubric-head">
-                <span>2. Seguridad e Higiene en el Taller</span>
-                <div class="rubric-score-inline">
-                    <span>Pts:</span>
-                    <input type="text" id="s2" placeholder="—" maxlength="2" oninput="calcTotal()">
-                    <span>/ 4</span>
-                </div>
-            </div>
-            <div class="rubric-levels">
-                <div class="rl rl-exc"><strong>Exc — 4 pts:</strong> 100 % de cumplimiento en normas físicas e individuales de seguridad.</div>
-                <div class="rl rl-sat"><strong>Sat — 3 pts:</strong> Falla en una norma pero la corrige de inmediato al recibir indicación.</div>
-                <div class="rl rl-req"><strong>Req — 2 pts:</strong> Incumple constantemente comprometiendo la seguridad del equipo.</div>
+            <div class="rubric-title">2. Seguridad e Higiene</div>
+            <div class="rubric-level level-exc"><strong>Exc (4 pts):</strong> 100% de cumplimiento (cabello, ropa, joyería).</div>
+            <div class="rubric-level level-sat"><strong>Sat (3 pts):</strong> Falla en una norma pero corrige al instante.</div>
+            <div class="rubric-level level-req"><strong>Req (2 pts):</strong> Incumple constantemente las normas del taller.</div>
+            <div class="rubric-score">
+                <span>Puntaje:</span>
+                <input type="text" placeholder="0">
             </div>
         </div>
 
-        <!-- Criterio 3 -->
         <div class="rubric-card">
-            <div class="rubric-head">
-                <span>3. Trabajo Colaborativo (NEM)</span>
-                <div class="rubric-score-inline">
-                    <span>Pts:</span>
-                    <input type="text" id="s3" placeholder="—" maxlength="2" oninput="calcTotal()">
-                    <span>/ 4</span>
-                </div>
-            </div>
-            <div class="rubric-levels">
-                <div class="rl rl-exc"><strong>Exc — 4 pts:</strong> Roles claros, equidad de tareas y apoyo mutuo dentro de la comunidad.</div>
-                <div class="rl rl-sat"><strong>Sat — 3 pts:</strong> Cooperan, pero la carga técnica recae principalmente en una sola persona.</div>
-                <div class="rl rl-req"><strong>Req — 2 pts:</strong> Falta de organización evidente o conflictos internos durante la práctica.</div>
+            <div class="rubric-title">3. Trabajo Colaborativo (NEM)</div>
+            <div class="rubric-level level-exc"><strong>Exc (4 pts):</strong> Roles claros, equidad, empatía y cultura de paz.</div>
+            <div class="rubric-level level-sat"><strong>Sat (3 pts):</strong> Trabajan bien, pero la carga técnica se concentra en uno solo.</div>
+            <div class="rubric-level level-req"><strong>Req (2 pts):</strong> Conflictos, falta de comunicación o desinterés.</div>
+            <div class="rubric-score">
+                <span>Puntaje:</span>
+                <input type="text" placeholder="0">
             </div>
         </div>
 
-        <!-- Total -->
-        <div class="rubric-total">
-            <label>Calificación Final</label>
-            <input type="text" id="total" placeholder="— / 12" readonly style="cursor:default;">
-        </div>
-
-        <!-- Firmas (solo impresión) -->
-        <div class="firma-row">
-            <div class="firma-box">
-                <div class="firma-line"></div>
-                <div class="firma-label">Firma del Docente</div>
-            </div>
-            <div class="firma-box">
-                <div class="firma-line"></div>
-                <div class="firma-label">Vo. Bo. / Sello</div>
-            </div>
-            <div class="firma-box">
-                <div class="firma-line"></div>
-                <div class="firma-label">Coordinador(a) del Equipo</div>
+        <div class="rubric-card">
+            <div class="rubric-title">4. Calidad del Reporte Técnico</div>
+            <div class="rubric-level level-exc"><strong>Exc (4 pts):</strong> Bitácora técnica clara, fotos y todas las conclusiones.</div>
+            <div class="rubric-level level-sat"><strong>Sat (3 pts):</strong> Completo, pero lenguaje informal o falta una conclusión.</div>
+            <div class="rubric-level level-req"><strong>Req (2 pts):</strong> Incompleto, sin imágenes claras o sin reflexiones.</div>
+            <div class="rubric-score">
+                <span>Puntaje:</span>
+                <input type="text" placeholder="0">
             </div>
         </div>
 
-        <!-- Pie de página impresión -->
-        <div class="print-footer">
-            CECyT 08 "La Trinitaria" · IPN · Soporte y Gestión de TI · Módulo I · NEM
+        <div class="form-group" style="margin-top: 20px;">
+            <label style="color: var(--primary-color); font-size:1.1rem;">Calificación Total:</label>
+            <input type="text" placeholder="Total / 16 puntos" style="font-weight: bold; text-align: center; background: #fff8f8;">
         </div>
-    </div><!-- /panel 4 -->
-
-    <!-- ── FOOTER ── -->
-    <div class="footer-bar">
-        <button class="btn btn-print" onclick="imprimir()">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/>
-            </svg>
-            Imprimir / Guardar PDF
-        </button>
     </div>
 
-</div><!-- /shell -->
-
-<script>
-    /* ── Carga de imágenes con <img> real (compatible con impresión) ── */
-    document.querySelectorAll('.photo-slot').forEach(slot => {
-        const input   = slot.querySelector('input[type="file"]');
-        const preview = slot.querySelector('.img-preview');
-
-        input.addEventListener('change', e => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = ev => {
-                preview.src = ev.target.result;
-                slot.classList.add('has-img');
-            };
-            reader.readAsDataURL(file);
-        });
-    });
-
-    /* ── Cálculo automático del total de la rúbrica ── */
-    function calcTotal() {
-        const ids = ['s1', 's2', 's3'];
-        let sum = 0, valid = 0;
-        ids.forEach(id => {
-            const v = parseInt(document.getElementById(id).value, 10);
-            if (!isNaN(v) && v >= 0) { sum += v; valid++; }
-        });
-        const el = document.getElementById('total');
-        el.value = valid > 0 ? `${sum} / 12` : '';
-    }
-
-    /* ── Imprimir ── */
-    function imprimir() {
-        window.print();
-    }
-</script>
+    <div class="footer-buttons">
+        <button class="btn btn-primary" onclick="alert('Reporte guardado localmente (Simulado)')">Guardar Reporte</button>
+    </div>
+</div>
 
 </body>
 </html>
